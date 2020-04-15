@@ -8,3 +8,8 @@ class Equipment(Item):
         self.power = power
         self.type = type
 
+    def display(self):
+        print("Power: " + str(self.power))
+        print("Type: " + str(self.type))
+        print("Size: " + str(self.size))
+
