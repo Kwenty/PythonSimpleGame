@@ -39,8 +39,8 @@ class Player:
 
     def heal(self, amount):
         self.health = round(self.health + amount, 1)
-        if self.health > 100:
-            self.health = 100
+        if self.health > self.max_health:
+            self.health = self.max_health
         print("You now have " + str(self.health) + "HP")
 
     def find_equipment(self, equipement):
