@@ -31,6 +31,7 @@ class Menu:
     @staticmethod
     def display_throw_menu(player):
         table = []
+        index = 0
         for index, e in enumerate(player.equipment):
             table.append([index + 1, e.name, e.type, e.power, e.size])
         table.append([index + 2, "Forgive"])

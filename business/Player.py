@@ -55,8 +55,6 @@ class Player:
                 prompt_throw_menu = Prompt.prompt("What do you want to drop ?  ", int, range(1, equipement_amount + 1))
                 if prompt_throw_menu != equipement_amount + 1:
                     self.drop_equipment(prompt_throw_menu - 1)
-                    self.take_equipment(equipement)
-                    print("You're swapping the two equipments")
                 else:
                     print("You leave the " + equipement.name)
             else:
@@ -79,6 +77,9 @@ class Player:
         self.equipment.remove(equipment)
 
     def fight_monster(self, monster):
+        monster.damages -= self.armor
+        if monster.damages < 0:
+            monster.damages = 0
         if randrange(0, 1) == 1:
             print("You attack first")
             input()
@@ -86,9 +87,6 @@ class Player:
         else:
             print("The " + monster.name + " attacks first")
             input()
-            monster.damages -= self.armor
-            if monster.damages < 0:
-                monster.damages = 0
         while monster.health > 0 and self.health > 0:
             self.health -= monster.damages
             monster.health -= self.damages
