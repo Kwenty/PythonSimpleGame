@@ -7,7 +7,8 @@ class Menu:
         print("1. Change room")
         print("2. Inventory")
         print("3. Player statistics")
-        print("4. Give up")
+        print("4. Show map")
+        print("5. Give up")
 
     @staticmethod
     def display_movement_menu(position, rooms_matrix):

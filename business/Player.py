@@ -1,3 +1,5 @@
+import networkx as nx
+import matplotlib.pyplot as plt
 from tabulate import tabulate
 from random import randrange
 from helpers.Menu import Menu
@@ -14,6 +16,7 @@ class Player:
         self.armor = 0
         self.invetory_size = 30
         self.position = 0
+        self.map = []
 
     def display_inventory(self):
         table = []
@@ -96,3 +99,27 @@ class Player:
             print("Well done, you beat the monster")
             self.health = round(self.health, 1)
             print("You have " + str(self.health) + "PV left")
+
+    def move(self, availables, move_to):
+        r_from = str(chr(self.position + 65))
+        for r in availables:
+            r_to = str(chr(availables[r] + 65))
+            if not self.is_mapped(r_from, r_to):
+                self.map.append((r_from, r_to))
+        self.position = availables[move_to]
+
+    def is_mapped(self, from_p, to_p):
+        found = False
+        for d in self.map:
+            if d[0] == from_p and d[1] == to_p:
+                found = True
+                break
+        return found
+
+    def show_map(self):
+        map_graphe = nx.Graph()
+        map_graphe.add_node("A")
+        map_graphe.add_edges_from(self.map)
+        nx.draw_networkx(map_graphe)
+        plt.savefig("map.png")
+        plt.show()

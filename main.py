@@ -32,29 +32,31 @@ player = Player(input("Please enter the name of your adventurer: "))
 print("Good luck " + player.name)
 print()
 Menu.display_main_menu()
-prompt_main_menu = Prompt.prompt("Choice: ", int, range(1, 5))
-while prompt_main_menu != 4:
+prompt_main_menu = Prompt.prompt("Choice: ", int, range(1, 6))
+while prompt_main_menu != 5:
     if prompt_main_menu == 1:
         availables, possibilities = Menu.display_movement_menu(player.position, rooms_matrix)
         prompt_movement_menu = Prompt.prompt("Where do you want to go: ", int, range(1, possibilities + 1))
-        player.position = availables[prompt_movement_menu]
+        player.move(availables, prompt_movement_menu)
         print()
         if player.position == 15:
             break
         else:
             Room.random(player)
             if player.health < 0:
-                break;
+                break
     elif prompt_main_menu == 2:
         player.display_inventory()
         input()
-    else:
+    elif prompt_main_menu == 3:
         player.display_player_statistics()
         input()
+    else:
+        player.show_map()
     Menu.display_main_menu()
-    prompt_main_menu = Prompt.prompt("Choice: ", int, range(1, 5))
+    prompt_main_menu = Prompt.prompt("Choice: ", int, range(1, 6))
     print()
-if prompt_main_menu == 4:
+if prompt_main_menu == 5:
     print("You're a loser, you must never give up again.")
 elif player.health > 0:
     print("Congratulations on getting out of the castle !!")
