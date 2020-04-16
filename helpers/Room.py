@@ -60,8 +60,8 @@ def random(player):
 def random_monster(position):
     return Monster(
         monsters[randrange(0, len(monsters))],
-        position * randrange(10, 17),
-        position * randrange(10, 17) / 10
+        position * randrange(10, 15),
+        position * randrange(10, 15) / 10
     )
 
 
